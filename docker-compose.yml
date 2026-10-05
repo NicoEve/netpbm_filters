@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  mpi-master:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mpi-master
+    volumes:
+      - .:/app
+    environment:
+      - OMPI_ALLOW_RUN_AS_ROOT=1
+      - OMPI_ALLOW_RUN_AS_ROOT_CONFIRM=1
+    command: mpirun -np 4 ./mpi_filterer images/sulfur.pgm sulfur_mpi_out.pgm
